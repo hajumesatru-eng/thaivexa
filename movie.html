@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title id="title"></title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="detail"></div>
+
+<script src="config.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get("id");
+const lang = localStorage.getItem("lang") || "en-US";
+
+async function load(){
+const res = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=${lang}`);
+const d = await res.json();
+
+document.getElementById("detail").innerHTML=`
+<h1>${d.title}</h1>
+
+<div class="ad">
+<script>
+atOptions = {'key':'53541ca00eed825e8c431c12f7418ac0','format':'iframe','height':250,'width':300};
+</script>
+<script src="https://buffcasualwhine.com/53541ca00eed825e8c431c12f7418ac0/invoke.js"></script>
+</div>
+
+<img src="${IMG_URL+d.poster_path}">
+
+<div class="ad">
+<script>
+atOptions = {'key':'53541ca00eed825e8c431c12f7418ac0','format':'iframe','height':250,'width':300};
+</script>
+<script src="https://buffcasualwhine.com/53541ca00eed825e8c431c12f7418ac0/invoke.js"></script>
+</div>
+
+<p>${d.overview}</p>
+
+<div class="ad">
+<script>
+atOptions = {'key':'53541ca00eed825e8c431c12f7418ac0','format':'iframe','height':250,'width':300};
+</script>
+<script src="https://buffcasualwhine.com/53541ca00eed825e8c431c12f7418ac0/invoke.js"></script>
+</div>
+`;
+}
+
+load();
+</script>
+
+</body>
+</html>
